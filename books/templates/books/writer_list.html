@@ -1,0 +1,63 @@
+{% extends '_base.html' %}
+
+{% block page_title %}
+    Writer List
+{% endblock page_title %}
+
+{% block content %}
+    {#    {% for writer in writers %}#}
+    {#        <h1><a href="{% url 'writer_detail_url' writer.pk writer.name %}">{{ writer.name }}</a> [{{ writer.datetime_created }}]</h1>#}
+    {#        <p>.......................................</p>#}
+    {#    {% endfor %}#}
+
+
+    <div class="container mt-4">
+        <div class="row flex-row-reverse justify-content-md-center">
+            {% for writer in writers %}
+                <div class="card m-2" style="max-width: 45%">
+                    <div class="row g-0 h-100" dir="ltr">
+                        {#                        <div class="col-md-4">#}
+                        {#                            <img src="https://newcdn.fidibo.com/images/books/69249_94233_normal.jpg"#}
+                        {#                                 class="img-fluid rounded-start" alt="...">#}
+                        {#                        </div>#}
+                        <div class="col-md-8 h-100">
+                            <div class="d-flex flex-column justify-content-between h-100">
+                                <div class="card-body">
+                                    <h3 class="card-title"><strong>{{ writer.name }}</strong></h3>
+                                    <p class="card-text pt-3">
+                                        {{ writer.content | truncatewords:30 }}
+                                    </p>
+                                    <a class="btn btn-success my-2 my-sm-0 mt-3"
+                                       href="{% url 'writer_detail_url' writer.pk %}">Read more...</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <nav aria-label="...">
+        <ul class="pagination">
+            {% if writers.has_previous %}
+                <li class="page-item"><a class="page-link"
+                                         href="?page={{ writers.previous_page_number }}">{{ writers.previous_page_number }}
+                    (Previous)</a></li>
+            {% endif %}
+            <li class="page-item active">
+                <span class="page-link">
+                {{ writers.number }}
+                <span class="sr-only">(current)</span>
+                </span>
+            </li>
+            {% if writers.has_next %}
+                <li class="page-item">
+                    <a class="page-link"
+                       href="?page={{ writers.next_page_number }}">{{ writers.next_page_number }}
+                        (Next)</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+{% endblock content %}

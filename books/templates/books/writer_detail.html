@@ -1,0 +1,36 @@
+{% extends '_base.html' %}
+
+{% block page_title %}
+    Writer Detail of {{ writer.name }}
+{% endblock page_title %}
+
+{% block content %}
+
+    <div class="container mt-5" dir="ltr">
+        <div class="">
+            <div class="">
+                <div class="d-flex justify-content-center" dir="auto">
+                    <div class="row w-sm-75 w-100">
+                        <div class="col-xs-12 col-md-8 text-center text-md-end mt-md-1 mt-4" dir="auto">
+                            <h1>{{ writer.name }}</h1>
+                            <h5 class="my-1"><span
+                                    class="text-muted small"><i>datetime created</i>: </span>{{ writer.datetime_created }}
+                                {% if user.is_staff %}
+                                    <a class="btn btn-success my-2 my-sm-0 mt-3"
+                                       href="{% url 'update_writer_url' writer.pk %}">Edit</a>
+                                {% endif %}
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center" dir="ltr">
+                    <div class="my-3 p-5 w-sm-75 w-100">
+                        {{ writer.content | linebreaks }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

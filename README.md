@@ -1,4 +1,4 @@
-﻿# django book store
+# django book store
 
  Bookstore site developed with Django .
 
